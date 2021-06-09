@@ -21,33 +21,41 @@
             color: white;
             width: 100vw;
             height: 100vh;
-            background-image: url(./b.jpg);
+            background-image: url(./b.png);
             background-size: contain;
-            padding: 17rem 0 0 0;
-        }
-
-        div.writer{
-            text-align: right;        
-            margin: 0px auto 0;
-            font-size: 0.5rem;
-            width: 10rem;
-            height: 0.7rem;
-            line-height: 0.7rem;            
+            padding: 16rem 0 0 0;
         }
 
         div.sentence{
-            text-align: center;        
+            text-align: center;    
+        }
+
+        div.writer{
+            text-align: right;            
+        }
+
+        div.left{
+            text-align: left;
+        }
+
+        div.right{
+            text-align: right;
+        }
+
+        div:not(.container){
             margin: 0 auto 0.3rem;
             font-size: 0.5rem;
-            width: 10rem;
+            width: 11rem;
             height: 0.7rem;
-            line-height: 0.7rem;    
+            line-height: 0.7rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="left">『</div>
         <div class="sentence">这是我的第一个个人网站</div>
+        <div class="right">』</div>
         <div class="writer">-虎虎</div>
     </div>
     <script>
