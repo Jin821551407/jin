@@ -57,7 +57,7 @@
             sentence.innerHTML = '';
             writer.innerHTML = '';
             let xhr = new XMLHttpRequest();
-            xhr.open('GET','https://v1.hitokoto.cn/?c=h');
+            xhr.open('GET','https://v1.hitokoto.cn/');
             xhr.send();
             xhr.onreadystatechange= function(){
                 if(xhr.readyState === 4){
