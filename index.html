@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div.container{
+            color: white;
+            width: 100%;
+            height: 750px;
+            background-image: url(./a.png);
+            background-size: cover;
+            padding: 300px 0 0 0;
+        }
+
+        div.writer{
+            text-align: right;        
+            margin: 0px auto 0;
+            font-size: 40px;
+            width: 800px;
+            height: 50px;
+            line-height: 50px;            
+        }
+
+        div.sentence{
+            text-align: center;        
+            margin: 0 auto 0;
+            font-size: 40px;
+            width: 1200px;
+            height: 50px;
+            line-height: 50px;    
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sentence">from yiyan</div>
+        <div class="writer">-from</div>
+    </div>
+    <script>
+        let sentence = document.querySelector('.sentence');
+        let writer = document.querySelector('.writer');
+        function fn(){
+            sentence.innerHTML = '';
+            writer.innerHTML = '';
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET','https://v1.hitokoto.cn/?c=h');
+            xhr.send();
+            xhr.onreadystatechange= function(){
+                if(xhr.readyState === 4){
+                    sentence.innerHTML = JSON.parse(xhr.response).hitokoto;
+                    writer.innerHTML = '-' + JSON.parse(xhr.response).from;
+                }
+            }
+        };        
+        setInterval(fn,5 * 1000);
+    </script>
+</body>
+</html>
