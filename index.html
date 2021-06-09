@@ -22,8 +22,8 @@
             width: 100vw;
             height: 100vh;
             background-image: url(./b.png);
-            background-size: contain;
-            padding: 16rem 0 0 0;
+            background-size: cover;
+            padding: 10rem 0 0 0;
         }
 
         div.sentence{
@@ -44,10 +44,10 @@
 
         div:not(.container){
             margin: 0 auto 0.3rem;
-            font-size: 0.5rem;
+            font-size: 0.7rem;
             width: 11rem;
-            height: 0.7rem;
-            line-height: 0.7rem;
+            height: 0.8rem;
+            line-height: 0.8rem;
         }
     </style>
 </head>
@@ -65,7 +65,7 @@
             sentence.innerHTML = '';
             writer.innerHTML = '';
             let xhr = new XMLHttpRequest();
-            xhr.open('GET','https://v1.hitokoto.cn/');
+            xhr.open('GET','https://v1.hitokoto.cn/?c=a&c=b&c=d&c=e&c=f&');
             xhr.send();
             xhr.onreadystatechange= function(){
                 if(xhr.readyState === 4){
@@ -73,8 +73,9 @@
                     writer.innerHTML = '-' + JSON.parse(xhr.response).from;
                 }
             }
-        };        
-        setInterval(fn,5 * 1000);
+        };
+        setTimeout(setInterval(fn,5 * 1000),10);  
+        
     </script>
 </body>
 </html>
