@@ -57,9 +57,11 @@
         <div class="sentence">这是我的第一个个人网站</div>
         <div class="right">』</div>
         <div class="writer">-虎虎</div>
-        <figure>
-            <audio autoplay loop src="./a.mp3"></audio>
-        </figure>
+        <div class="audio">
+            <audio autoplay = "autoplay" controls = "controls" loop = "loop" preload = "auto" src = "./a.mp3" >
+                你的浏览器不支持audio标签
+            </audio>
+        </div>
     </div>
     <script>
         let sentence = document.querySelector('.sentence');
