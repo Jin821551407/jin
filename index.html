@@ -61,7 +61,7 @@
 <body>
     <div class="container">
         <div class="audio">
-            <audio id="audio" preload="auto" loop>
+            <audio id="audio" preload="auto" loop preload="auto">
                 <source src="./a.mp3" type="audio/mpeg">
             </audio>
         </div>
@@ -69,7 +69,8 @@
         <div class="sentence">这是我的第一个个人网站</div>
         <div class="right">』</div>
         <div class="writer">-虎虎</div>
-    </div>
+    </div>    
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script>
         let sentence = document.querySelector('.sentence');
         let writer = document.querySelector('.writer');
@@ -87,20 +88,18 @@
             }
         }, 5 * 1000);
 
-        // let audio = document.querySelector('#audio');
-        // document.querySelector('.container').onclick = function () {
-        //     if (audio.paused){          
-        //         audio.play();
-        //     }
-        // }
-    </script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script type="text/javascript">
+        
+        let audio = document.getElementById('audio');
+        let container = document.querySelector('.container')
         document.addEventListener("WeixinJSBridgeReady", function () { 
-            document.getElementById('audio').play(); 
-            // document.getElementById('video').play(); 
+            audio.play(); 
         }, false);
-    </script>
-</body>
 
+        
+        container.onclick = function () {
+            if (audio.paused){
+                audio.play();
+            }
+        }
+    </script>
 </html>
