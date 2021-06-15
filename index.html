@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>虎虎的个人主页</title>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -55,7 +55,6 @@
         div.audio {
             height: 0rem;
         }
-
     </style>
 </head>
 
@@ -74,8 +73,7 @@
     <script>
         let sentence = document.querySelector('.sentence');
         let writer = document.querySelector('.writer');
-
-        function fn() {
+        setInterval(function () {
             sentence.innerHTML = '';
             writer.innerHTML = '';
             let xhr = new XMLHttpRequest();
@@ -87,42 +85,21 @@
                     writer.innerHTML = '-' + JSON.parse(xhr.response).from;
                 }
             }
-        };
-        setInterval(fn, 5 * 1000);
-        window.onload = function () {
-            let audio = document.querySelector('#audio');
-            document.querySelector('.container').onclick = function () {
-                if (audio.paused){
-                    audio.play();
-                }
-            }
-        }
-        function audioAutoPlay(audio){
-            wx.config({
-                debug: false,  // 配置信息, 即使不正确也能使用 wx.ready
-                appId: "",
-                timestamp: 1,
-                nonceStr: "",
-                signature: "",
-                jsApiList: []
-            });
-            wx.ready(function() {
-                var globalAudio = document.getElementById(audio);
-                globalAudio.play();
-                audio.play();
-                //微信下兼容处理
-                document.addEventListener(  "WeixinJSBridgeReady", function() {
-                        audio.play();
-                    },
-                    false
-                );
-                document.addEventListener( "YixinJSBridgeReady", function() {
-                        audio.play();
-                    }, false );
-            });
-        }
+        }, 5 * 1000);
 
-        audioAutoPlay(audio);
+        // let audio = document.querySelector('#audio');
+        // document.querySelector('.container').onclick = function () {
+        //     if (audio.paused){          
+        //         audio.play();
+        //     }
+        // }
+    </script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        document.addEventListener("WeixinJSBridgeReady", function () { 
+            document.getElementById('audio').play(); 
+            // document.getElementById('video').play(); 
+        }, false);
     </script>
 </body>
 
