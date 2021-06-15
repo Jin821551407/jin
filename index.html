@@ -1,85 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>虎虎的个人主页</title>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
 
-        html{
+        html {
             font-size: 5.33333vw;
         }
 
 
-        div.container{
+        div.container {
             box-sizing: border-box;
             color: white;
             width: 100vw;
             height: 100vh;
             background-image: url(./b.png);
             background-size: cover;
-            padding: 10rem 0 0 0;
+            padding-top: 2rem;
         }
 
-        div.sentence{
-            text-align: center;    
+        div.sentence {
+            text-align: center;
         }
 
-        div.writer{
-            text-align: right;            
-        }
-
-        div.left{
-            text-align: left;
-        }
-
-        div.right{
+        div.writer {
             text-align: right;
         }
 
-        div:not(.container){
+        div.left {
+            text-align: left;
+        }
+
+        div.right {
+            text-align: right;
+        }
+
+        div:not(.container) {
             margin: 0 auto 0.3rem;
             font-size: 0.7rem;
             width: 11rem;
             height: 0.8rem;
             line-height: 0.8rem;
         }
+
+        div.audio {
+            height: 0rem;
+        }
+
     </style>
 </head>
+
 <body>
     <div class="container">
+        <div class="music">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+            <span class="line line4"></span>
+            <span class="line line5"></span>
+        </div>
+        <div class="audio">
+            <audio id="audio" preload="auto" loop>
+                <source src="./a.mp3" type="audio/mpeg">
+            </audio>
+        </div>
         <div class="left">『</div>
         <div class="sentence">这是我的第一个个人网站</div>
         <div class="right">』</div>
         <div class="writer">-虎虎</div>
-        <div class="audio">
-            <audio autoplay = "autoplay" controls = "controls" loop = "loop" preload = "auto" src = "./a.mp3" >
-                你的浏览器不支持audio标签
-            </audio>
-        </div>
     </div>
     <script>
         let sentence = document.querySelector('.sentence');
         let writer = document.querySelector('.writer');
-        function fn(){
+
+        function fn() {
             sentence.innerHTML = '';
             writer.innerHTML = '';
             let xhr = new XMLHttpRequest();
-            xhr.open('GET','https://v1.hitokoto.cn/?c=a&c=b&c=d&c=e&c=f&');
+            xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b&c=d&c=e&c=f&');
             xhr.send();
-            xhr.onreadystatechange= function(){
-                if(xhr.readyState === 4){
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
                     sentence.innerHTML = JSON.parse(xhr.response).hitokoto;
                     writer.innerHTML = '-' + JSON.parse(xhr.response).from;
                 }
             }
         };
-        setInterval(fn,5 * 1000);        
+        setInterval(fn, 5 * 1000);
+        // window.onload = function () {
+        //     let audio = document.querySelector('#audio');
+        //     document.querySelector('.container').onclick = function () {
+        //         if (audio.paused){
+        //             audio.play();
+        //         }
+        //     }
+        // }
+        function audioAutoPlay(id){
+            wx.config({
+                debug: false,  // 配置信息, 即使不正确也能使用 wx.ready
+                appId: "",
+                timestamp: 1,
+                nonceStr: "",
+                signature: "",
+                jsApiList: []
+            });
+            wx.ready(function() {
+                var globalAudio = document.getElementById(id);
+                globalAudio.play();
+                audio.play();
+                //微信下兼容处理
+                document.addEventListener(  "WeixinJSBridgeReady", function() {
+                        audio.play();
+                    },
+                    false
+                );
+                document.addEventListener( "YixinJSBridgeReady", function() {
+                        audio.play();
+                    }, false );
+            });
+        }
+
+        audioAutoPlay(audio);
+
     </script>
 </body>
+
 </html>
