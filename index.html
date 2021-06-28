@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>进来吸猫</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style>
         * {
             margin: 0;
@@ -36,19 +38,23 @@
             background-image: url(./images/2.jpg);
             background-size: cover;
         }
+
         .Slide4 {
             background-image: url(./images/3.jpg);
             background-size: cover;
         }
+
         .Slide5 {
             background-image: url(./images/4.jpg);
             background-size: cover;
         }
+
         .Slide6 {
             background-image: url(./images/5.jpg);
             background-size: cover;
         }
-        .yiyan{
+
+        .yiyan {
             font-size: .8rem;
             height: 2.5rem;
             width: 80vw;
@@ -64,19 +70,24 @@
             display: flex;
             flex-direction: column;
         }
-        .left{
+
+        .left {
             text-align: left;
         }
-        .sentence{
+
+        .sentence {
             text-align: center;
         }
-        .right{
+
+        .right {
             text-align: right;
         }
-        .writer{
+
+        .writer {
             text-align: right;
         }
-        .start{
+
+        .start {
             font-size: .8rem;
             width: 80vw;
             height: 1.25rem;
@@ -126,19 +137,17 @@
 </script>
 <script>
     var mySwiper = new Swiper(
-        '.swiper-container', 
-        {
+        '.swiper-container', {
             loop: false, // 循环模式选项
             effect: 'fade',
             pagination: {
                 el: '.swiper-pagination',
-                type : 'progressbar',
-            },  
-            watchSlidesProgress : true,//开启进度空值
+                type: 'progressbar',
+            },
+            watchSlidesProgress: true, //开启进度空值
         }
     )
 </script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <!-- <script src="./js/weixin.js"></script> -->
 <script>
     let sentence = document.querySelector('.sentence');
@@ -146,16 +155,16 @@
     let audio = document.getElementById('audio');
     let container = document.querySelector('.swiper-container')
     let start = document.querySelector('.start')
-    
-    document.addEventListener("WeixinJSBridgeReady", function () { 
-        audio.play(); 
+
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        audio.play();
     }, false);
 
     setInterval(function () {
         sentence.innerHTML = '';
         writer.innerHTML = '';
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b');
+        xhr.open('GET', 'https://v1.hitokoto.cn/?c=a');
         xhr.send();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -165,19 +174,18 @@
         }
     }, 5 * 1000);
 
-    container.addEventListener('touchend',function () {
-            if (audio.paused){
-                audio.play();
-            }
-            if(mySwiper.slides[5].progress === 0){
-                start.innerHTML='滑到底啦<<<敬请期待';
-            }else if(mySwiper.slides[0].progress === 0){
-                start.innerHTML='向右滑动>>>解锁更多';
-            }else{
-                start.innerHTML='';
-            }
-        }) 
-    
-    // container.addEventListener('click',sendMessage)
+    container.addEventListener('touchend', function () {
+        if (audio.paused) {
+            audio.play();
+        }
+        if (mySwiper.slides[5].progress === 0) {
+            start.innerHTML = '滑到底啦<<<敬请期待';
+        } else if (mySwiper.slides[0].progress === 0) {
+            start.innerHTML = '向右滑动>>>解锁更多';
+        } else {
+            start.innerHTML = '';
+        }
+    })
 </script>
+
 </html>
