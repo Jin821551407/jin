@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>虎虎的个人主页</title>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <title>进来吸猫</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
     <style>
         * {
             margin: 0;
@@ -14,93 +13,167 @@
         }
 
         html {
-            font-size: 5.33333vw;
+            font-size: 5.333333vw;
         }
 
-
-        div.container {
-            box-sizing: border-box;
-            color: white;
+        .swiper-container {
             width: 100vw;
             height: 100vh;
-            background-image: url(./b.png);
+            --swiper-pagination-color: skyblue;
+        }
+
+        .Slide1 {
+            background-image: url(./images/main.png);
             background-size: cover;
-            padding-top: 9rem;
         }
 
-        div.sentence {
-            text-align: center;
+        .Slide2 {
+            background-image: url(./images/1.jpg);
+            background-size: cover;
         }
 
-        div.writer {
-            text-align: right;
+        .Slide3 {
+            background-image: url(./images/2.jpg);
+            background-size: cover;
         }
-
-        div.left {
+        .Slide4 {
+            background-image: url(./images/3.jpg);
+            background-size: cover;
+        }
+        .Slide5 {
+            background-image: url(./images/4.jpg);
+            background-size: cover;
+        }
+        .Slide6 {
+            background-image: url(./images/5.jpg);
+            background-size: cover;
+        }
+        .yiyan{
+            height: 2.5rem;
+            width: 80vw;
+            color: white;
+            position: absolute;
+            top: -10rem;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            background-color: transparent;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+        }
+        .left{
             text-align: left;
         }
-
-        div.right {
+        .sentence{
+            text-align: center;
+        }
+        .right{
             text-align: right;
         }
-
-        div:not(.container) {
-            margin: 0 auto 0.3rem;
-            font-size: 0.7rem;
-            width: 11rem;
-            height: 0.8rem;
-            line-height: 0.8rem;
+        .writer{
+            text-align: right;
         }
-
-        div.audio {
-            height: 0rem;
+        .start{
+            font-size: .8rem;
+            width: 80vw;
+            height: 1.25rem;
+            color: white;
+            text-align: center;
+            position: absolute;
+            top: 14rem;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 999;
         }
     </style>
 </head>
+<div class="swiper-container">
+    <div class="audio">
+        <audio id="audio" preload="auto" loop preload="auto">
+            <source src="./music/a.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <div class="yiyan">
+        <div class="left">『</div>
+        <div class="sentence">开始吸猫~~~</div>
+        <div class="right">』</div>
+        <div class="writer">-喵喵喵~</div>
+    </div>
+    <div class="start">向右滑动>>>开启音乐>>>解锁更多</div>
+    <div class="swiper-wrapper">
+        <div class="swiper-slide Slide1"></div>
+        <div class="swiper-slide Slide2"></div>
+        <div class="swiper-slide Slide3"></div>
+        <div class="swiper-slide Slide4"></div>
+        <div class="swiper-slide Slide5"></div>
+        <div class="swiper-slide Slide6"></div>
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+</div>
 
 <body>
-    <div class="container">
-        <div class="audio">
-            <audio id="audio" preload="auto" loop preload="auto">
-                <source src="./a.mp3" type="audio/mpeg">
-            </audio>
-        </div>
-        <div class="left">『</div>
-        <div class="sentence">这是我的第一个个人网站</div>
-        <div class="right">』</div>
-        <div class="writer">-虎虎</div>
-    </div>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-    <script>
-        let sentence = document.querySelector('.sentence');
-        let writer = document.querySelector('.writer');
-        setInterval(function () {
-            sentence.innerHTML = '';
-            writer.innerHTML = '';
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b&c=d&c=e&c=f&');
-            xhr.send();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    sentence.innerHTML = JSON.parse(xhr.response).hitokoto;
-                    writer.innerHTML = '-' + JSON.parse(xhr.response).from;
-                }
+
+</body>
+<script type="module">
+    import Swiper from 'https://unpkg.com/swiper/swiper-bundle.esm.browser.min.js'
+    const swiper = new Swiper(...arg)
+</script>
+<script>
+    var mySwiper = new Swiper(
+        '.swiper-container', 
+        {
+            loop: false, // 循环模式选项
+            effect: 'fade',
+            pagination: {
+                el: '.swiper-pagination',
+                type : 'progressbar',
+            },  
+            watchSlidesProgress : true,//开启进度空值
+        }
+    )
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    let sentence = document.querySelector('.sentence');
+    let writer = document.querySelector('.writer');
+    setInterval(function () {
+        sentence.innerHTML = '';
+        writer.innerHTML = '';
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b&c=d&c=i&');
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                sentence.innerHTML = JSON.parse(xhr.response).hitokoto;
+                writer.innerHTML = '-' + JSON.parse(xhr.response).from;
             }
-        }, 5 * 1000);
+        }
+    }, 5 * 1000);
 
 
-        let audio = document.getElementById('audio');
-        let container = document.querySelector('.container')
-        document.addEventListener("WeixinJSBridgeReady", function () { 
-            audio.play(); 
-        }, false);
+    let audio = document.getElementById('audio');
+    let container = document.querySelector('.swiper-container')
 
+    // document.addEventListener("WeixinJSBridgeReady", function () { 
+    //     audio.play(); 
+    // }, false);
 
-        container.onclick = function () {
+    let start = document.querySelector('.start')
+
+    container.addEventListener('touchend',function () {
             if (audio.paused){
                 audio.play();
             }
-        }
-    </script>
-
+            if(mySwiper.slides[5].progress === 0){
+                start.innerHTML='滑到底啦<<<敬请期待';
+            }else{
+                start.innerHTML='';
+            }
+        }) 
+</script>
 </html>
