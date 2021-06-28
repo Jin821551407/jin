@@ -122,7 +122,7 @@
 </body>
 <script type="module">
     import Swiper from 'https://unpkg.com/swiper/swiper-bundle.esm.browser.min.js'
-    const swiper = new Swiper(...arg)
+    const swiper = new Swiper()
 </script>
 <script>
     var mySwiper = new Swiper(
@@ -139,42 +139,42 @@
     )
 </script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!-- <script src="./js/weixin.js"></script> -->
 <script>
-    let sentence = document.querySelector('.sentence');
-    let writer = document.querySelector('.writer');
-    setInterval(function () {
-        sentence.innerHTML = '';
-        writer.innerHTML = '';
-        let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b&c=d&c=i');
-        xhr.send();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                sentence.innerHTML = JSON.parse(xhr.response).hitokoto;
-                writer.innerHTML = '-' + JSON.parse(xhr.response).from;
+    window.onload = function (){
+        let sentence = document.querySelector('.sentence');
+        let writer = document.querySelector('.writer');
+        setInterval(function () {
+            sentence.innerHTML = '';
+            writer.innerHTML = '';
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    sentence.innerHTML = JSON.parse(xhr.response).hitokoto;
+                    writer.innerHTML = '-' + JSON.parse(xhr.response).from;
+                }
             }
-        }
-    }, 5 * 1000);
+        }, 5 * 1000);
 
 
-    let audio = document.getElementById('audio');
-    let container = document.querySelector('.swiper-container')
+        let audio = document.getElementById('audio');
+        let container = document.querySelector('.swiper-container')
+        let start = document.querySelector('.start')
 
-    // document.addEventListener("WeixinJSBridgeReady", function () { 
-    //     audio.play(); 
-    // }, false);
-
-    let start = document.querySelector('.start')
-
-    container.addEventListener('touchend',function () {
-            if (audio.paused){
-                audio.play();
-            }
-            if(mySwiper.slides[5].progress === 0){
-                start.innerHTML='滑到底啦<<<敬请期待';
-            }else{
-                start.innerHTML='';
-            }
-        }) 
+        container.addEventListener('touchend',function () {
+                if (audio.paused){
+                    audio.play();
+                }
+                if(mySwiper.slides[5].progress === 0){
+                    start.innerHTML='滑到底啦<<<敬请期待';
+                }else{
+                    start.innerHTML='';
+                }
+            }) 
+        
+        // container.addEventListener('click',sendMessage)
+    }
 </script>
 </html>
