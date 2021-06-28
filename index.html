@@ -104,7 +104,7 @@
         <div class="right">』</div>
         <div class="writer">-喵喵喵~</div>
     </div>
-    <div class="start">向右滑动>>>开启音乐>>>解锁更多</div>
+    <div class="start">向右滑动>>>解锁更多</div>
     <div class="swiper-wrapper">
         <div class="swiper-slide Slide1"></div>
         <div class="swiper-slide Slide2"></div>
@@ -141,40 +141,59 @@
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <!-- <script src="./js/weixin.js"></script> -->
 <script>
-    window.onload = function (){
-        let sentence = document.querySelector('.sentence');
-        let writer = document.querySelector('.writer');
-        setInterval(function () {
-            sentence.innerHTML = '';
-            writer.innerHTML = '';
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b');
-            xhr.send();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    sentence.innerHTML = JSON.parse(xhr.response).hitokoto;
-                    writer.innerHTML = '-' + JSON.parse(xhr.response).from;
-                }
+    let sentence = document.querySelector('.sentence');
+    let writer = document.querySelector('.writer');
+    setInterval(function () {
+        sentence.innerHTML = '';
+        writer.innerHTML = '';
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b');
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                sentence.innerHTML = JSON.parse(xhr.response).hitokoto;
+                writer.innerHTML = '-' + JSON.parse(xhr.response).from;
             }
-        }, 5 * 1000);
+        }
+    }, 5 * 1000);
 
 
-        let audio = document.getElementById('audio');
-        let container = document.querySelector('.swiper-container')
-        let start = document.querySelector('.start')
+    let audio = document.getElementById('audio');
+    let container = document.querySelector('.swiper-container')
+    let start = document.querySelector('.start')
 
-        container.addEventListener('touchend',function () {
-                if (audio.paused){
-                    audio.play();
-                }
-                if(mySwiper.slides[5].progress === 0){
-                    start.innerHTML='滑到底啦<<<敬请期待';
-                }else{
-                    start.innerHTML='';
-                }
-            }) 
-        
-        // container.addEventListener('click',sendMessage)
-    }
+    document.addEventListener("WeixinJSBridgeReady", function () { 
+        audio.play(); 
+    }, false);
+
+    container.addEventListener('touchend',function () {
+            if (audio.paused){
+                audio.play();
+            }
+            if(mySwiper.slides[5].progress === 0){
+                start.innerHTML='滑到底啦<<<敬请期待';
+            }else if(mySwiper.slides[0].progress === 0){
+                start.innerHTML='向右滑动>>>解锁更多';
+            }else{
+                start.innerHTML='';
+            }
+        }) 
+    
+    // container.addEventListener('click',sendMessage)
+    container.addEventListener('touch',function(){
+    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+        WeixinJSBridge.invoke('sendAppMessage',{
+            "appid":"", //appid 设置空就好了。
+            "img_url": './images/weixin.jpg', //分享时所带的图片路径
+            "img_width": "120", //图片宽度
+            "img_height": "120", //图片高度
+            "link":'http://jinlee.ngrok2.xiaomiqiu.cn/', //分享附带链接地址
+            "desc":"快进来吸猫", //分享内容介绍
+            "title":"喵喵喵~"
+        }, function(res){
+            /*** 回调函数，最好设置为空 ***/
+        }); 
+    });
+})
 </script>
 </html>
