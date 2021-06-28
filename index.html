@@ -143,6 +143,14 @@
 <script>
     let sentence = document.querySelector('.sentence');
     let writer = document.querySelector('.writer');
+    let audio = document.getElementById('audio');
+    let container = document.querySelector('.swiper-container')
+    let start = document.querySelector('.start')
+    
+    document.addEventListener("WeixinJSBridgeReady", function () { 
+        audio.play(); 
+    }, false);
+
     setInterval(function () {
         sentence.innerHTML = '';
         writer.innerHTML = '';
@@ -156,15 +164,6 @@
             }
         }
     }, 5 * 1000);
-
-
-    let audio = document.getElementById('audio');
-    let container = document.querySelector('.swiper-container')
-    let start = document.querySelector('.start')
-
-    document.addEventListener("WeixinJSBridgeReady", function () { 
-        audio.play(); 
-    }, false);
 
     container.addEventListener('touchend',function () {
             if (audio.paused){
