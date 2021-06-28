@@ -49,6 +49,7 @@
             background-size: cover;
         }
         .yiyan{
+            font-size: .8rem;
             height: 2.5rem;
             width: 80vw;
             color: white;
@@ -145,7 +146,7 @@
         sentence.innerHTML = '';
         writer.innerHTML = '';
         let xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b&c=d&c=i&');
+        xhr.open('GET', 'https://v1.hitokoto.cn/?c=a&c=b&c=d&c=i');
         xhr.send();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
